@@ -1,24 +1,140 @@
 FORMAT: 1A
 HOST: http://blog.acme.com
 
-# Gist Fox API SAX
-Gist Fox API is a **pastes service** similar to [GitHub's Gist](http://gist.github.com).
+# Emnify API
+The EMnify Service Core implements a RESTful API. Communication with the API is done over HTTP(S) requests with JSON body content and content-type "application/json" with an authentication token as a requirement for every API call.  All API calls must be made over https. 
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+## Authenticating the API
+Initial authentication against the API is done by providing user credentials, the API then returns a token that must be used in all future API calls in the header of the HTTP request as "X-Auth-Token".
 
-## Authentication
-Currently the Gist Fox API does not provide authenticated access.
+The access token will be valid for a certain time period and expire after that, the user will need to re-authenticate then to get a new access token in that case.
 
-## Media Types
-Where applicable this API uses the [HAL+JSON](https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md) media-type to represent resources states and affordances.
+For access from applications special access tokens are available that do not expire.
 
-Requests with a message-body are using plain JSON to set or update resource states.
+All API calls including the Authentication must be made over secure socket (SSL).
 
-## Error States
-The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
+## URL format
+
+All API URLs are following a generic structure like 
+
+    /api/APIVERSION/ENDPOINT/{object_id}
+
+e.g.
+
+    /api/v1/user/123
+
+Also some resources may provide access to further sub-resources
+
+    /api/v1/user/123/tracking
+
+## HTTP verbs
+
+While the API URLs represent the different resources you can work with, you can perform actions on them through different HTTP verbs. 
+
+* GET - retrieves a representation of a resource without side-effects (nothing changes on the server)
+* HEAD - retrieves just the resource meta-information (headers) i.e. same as GET but without the response body - also without side-effects
+* OPTIONS - returns the actions supported for specified the resource - also without side-effects
+* POST - creates a resource
+* PUT - (completely) replaces an existing resource
+* DELETE - deletes a resource
+* PATCH - sax
+
+For HTTP clients that only support POST and GET the method can be alternatively transmitted in the "X-HTTP-Method-Override" header.
+
+## HTTP Headers
+
+Each HTTP request must have at least the following headers:
+
+* Content-Type: application/json
+* Accept: application/json
+* X-Auth-Token: Access token as received during authentication
+
+## HTTP Return codes
+
+* 200 OK - Response to a successful GET, also used for a POST if it does not result in a creation
+* 201 Created - Response to a POST that results in a creation, usually will return a Location header pointing to the location of the new resource
+* 204 No Content - Response to a successful request that is not returning a body
+* 400 Bad Request - The request is malformed, e.g. the body cannot be parsed
+* 401 Unauthorized - No or invalid access token provided
+* 403 Forbidden - Access token is valid, but user has no access permissions to the request resource
+* 404 Not Found - A non-existent resource is requested
+* 405 Method Not Allowed - HTTP method being requested isn't allowed
+* 410 Gone - Indicates that the resource at this end point is no longer available.
+* 415 Unsupported Media Type - Incorrect content type was provided as part of the request
+* 422 Unprocessable Entity - Body will return list of validation errors
+* 429 Too Many Requests - Request is rejected due to rate limiting
+
+## Error Handling
+
+The API will return HTTP error codes according to the type of the error, 400 error codes are used for client related issues, 500 error codes for server side issue.
+
+### JSON error representation
+
+400 error codes come with a consumable JSON error representation:
+
+    {
+        "error_code" : 1000,
+        "error_token" : "InvalidAccessToken"
+        "message" : "XYZ failed",
+        "description" : "Here comes a detailed description of the error."
+    }
+
+Some error codes like ValidationFailed can contain multiple error messages embedded
+
+    {
+        "error_code" : 1005,
+        "error_token" : "Failed",
+        "message" : "Input validation failed",
+        "description" : "Here comes a detailed description of the error.",
+        "errors" : [
+            {
+                "error_code" : 2000,
+                "error_token" : "InvalidUsername",
+                "field" : "username",
+                "message" : "Username must be a valid email address"
+            },
+            {
+                "error_code" : 2001,
+                "error_token" : "InvalidOrganisationID",
+                "field" : "organisation_id",
+                "message" : "Organisation ID cannot be blank"
+            }
+        ]
+    }
+
+### List of Error Codes
+
+#### Generic Error Codes
+
+- 1000 - InvalidAccessToken
+- 1001 - AuthenticationFailed
+- 1002 - ValidationFailed
+- 1003 - UnknownUsername
+- 1004 - DuplicateUsername
+- 1005 - UnknownUserID
+- 1006 - UnknownEndpointID
+- 1007 - UnknownServiceProfileID
+
+#### Validation Error Codes
+
+- 2000 - InvalidUsername
+- 2001 - InvalidOrganisationID
+
+
+
+
+
+
+
+-------
+
+sax
+
+--------
+
+
+
+
 
 # Gist Fox API Root [/]
 Gist Fox API entry point.
