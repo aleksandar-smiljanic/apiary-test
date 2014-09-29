@@ -51,18 +51,20 @@ Each HTTP request must have at least the following headers:
 
 ## HTTP Return codes
 
-* 200 OK - Response to a successful GET, also used for a POST if it does not result in a creation
-* 201 Created - Response to a POST that results in a creation, usually will return a Location header pointing to the location of the new resource
-* 204 No Content - Response to a successful request that is not returning a body
-* 400 Bad Request - The request is malformed, e.g. the body cannot be parsed
-* 401 Unauthorized - No or invalid access token provided
-* 403 Forbidden - Access token is valid, but user has no access permissions to the request resource
-* 404 Not Found - A non-existent resource is requested
-* 405 Method Not Allowed - HTTP method being requested isn't allowed
-* 410 Gone - Indicates that the resource at this end point is no longer available.
-* 415 Unsupported Media Type - Incorrect content type was provided as part of the request
-* 422 Unprocessable Entity - Body will return list of validation errors
-* 429 Too Many Requests - Request is rejected due to rate limiting
+Code  | Description
+------------- | -------------
+200 OK | Response to a successful GET, also used for a POST if it does not result in a creation
+201 Created | Response to a POST that results in a creation, usually will return a Location header pointing to the location of the new resource
+204 No Content | Response to a successful request that is not returning a body
+400 Bad Request | The request is malformed, e.g. the body cannot be parsed
+401 Unauthorized | No or invalid access token provided
+403 Forbidden | Access token is valid, but user has no access permissions to the request resource
+404 Not Found | A non-existent resource is requested
+405 Method Not Allowed | HTTP method being requested isn't allowed
+410 Gone | Indicates that the resource at this end point is no longer available.
+415 Unsupported Media Type | Incorrect content type was provided as part of the request
+422 Unprocessable Entity | Body will return list of validation errors
+429 Too Many Requests | Request is rejected due to rate limiting
 
 ## Error Handling
 
@@ -106,19 +108,23 @@ Some error codes like ValidationFailed can contain multiple error messages embed
 
 #### Generic Error Codes
 
-- 1000 - InvalidAccessToken
-- 1001 - AuthenticationFailed
-- 1002 - ValidationFailed
-- 1003 - UnknownUsername
-- 1004 - DuplicateUsername
-- 1005 - UnknownUserID
-- 1006 - UnknownEndpointID
-- 1007 - UnknownServiceProfileID
+Code  | Description
+------------- | -------------
+1000 | InvalidAccessToken 
+1001 | AuthenticationFailed
+1002 | ValidationFailed
+1003 | UnknownUsername
+1004 | DuplicateUsername
+1005 | UnknownUserID
+1006 | UnknownEndpointID
+1007 | UnknownServiceProfileID
 
 #### Validation Error Codes
 
-- 2000 - InvalidUsername
-- 2001 - InvalidOrganisationID
+Code  | Description
+------------- | -------------
+2000 | InvalidUsername
+2001 | InvalidOrganisationID
 
 
 
