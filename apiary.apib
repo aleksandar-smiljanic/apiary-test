@@ -405,7 +405,63 @@ To create and endpoint provide provide endpoint JSON object.
 
 + Response 201
 
-    [List of endpoints][0]
+    + Body
+    
+            {
+                "id": "1",
+                "name": "arduino01",
+                "tags": "arduino, meter, temp",
+                "created": "2014-08-01T08:47:00+00:00",
+                "status": {
+                    "id": 1,
+                    "description": "ENABLED"
+                },
+                "service_profile": {
+                    "id": 1,
+                    "name": "Smart Meter"
+                },
+                "tariff_profile": {
+                    "id": 3,
+                    "name": "Domestic only"
+                },
+            
+                "image": "arduino.png",
+            
+                "sim": {
+                    "id": 788,
+                    "iccid": "736826736473829773621",
+                    "imsi": "901991234567890",
+                    "msisdn": "+88563748761"
+                },
+            
+                "imei": "864345678889321",           
+                "ip_address": "10.203.23.75",
+            
+                "runtime_data": {
+                    "connectivity": "Online",
+                    "ggsn_ip_address": "185.56.216.32",
+                    "sgsn_ip_address": "82.113.96.21",
+                    "msc": "+491790002121",
+                    "location": {
+                        "country": {
+                            "id": 902,
+                            "name": "Germany"
+                            },
+                        "lat": 51.0,
+                        "lng": -0.1,
+                        "accuracy": 1200.4
+                    }
+                },
+            
+                "usage_data": {
+                    "total" : 23,
+                    "tx" : 10,
+                    "rx" : 13,
+                    "max": 50,
+                    "costs": 4.12,
+                    "pm_costs": 5.12
+                }
+            }
 
 # Group SIMs
 Manages SIMs
