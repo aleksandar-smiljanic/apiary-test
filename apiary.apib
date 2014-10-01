@@ -133,24 +133,19 @@ Manages endpoints
 ## List of endpoints [/api/v1/endpoints]
 This resources returns the full list of endpoints including details, to which the requesting user has access to. It may also return an empty list.
 
-*Errors*
+**Errors**
 
 - InvalidAccessToken
 
-##### Response elements (list of)
+**Response elements (list of)**
 
-* **id**
-    * Unique ID of this endpoint
-    * Type: Integer
-* **name**
-    * Name of endpoint
-    * Type: String
-* **tags**
-    * Assgined Tags
-    * Type: String
-* **created**
-    * Timestamp when this endpoint was created
-    * Type: ISO 8601 timestamp format
+Name  | Description
+------------- | -------------
+id | Unique ID of this endpoint (String)
+name | Name of endpoint (string)
+tags | Assgined Tags (string)
+created | Timestamp when this endpoint was created (Type: ISO 8601 timestamp format)
+
 * **status**
     * **id**
         * ID of status this endpoint
