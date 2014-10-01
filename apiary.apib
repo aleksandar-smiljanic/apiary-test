@@ -375,7 +375,35 @@ This resources returns the full list of endpoints including details, to which th
 + Response 200
 
     [List of endpoints][]
+    
+### Create a new Endpoint [POST]
+To create and sndpoint provide provide endpoint JSON object.
 
+*Errors*
+
+- InvalidAccessToken
+- ValidationFailed
+
++ Request (application/json)
+
+            {
+                "name": "arduino01",
+                "tags": "arduino, meter, temp",
+                "status": {
+                    "id": 1
+                },
+                "service_profile": {
+                    "id": 2
+                },
+                "tariff_profile_id": {
+                    "id": 3
+                },
+                "ip_address": "10.203.23.78"
+            }
+
++ Response 201
+
+    [List of endpoints][0]
 
 # Group SIMs
 Manages SIMs
