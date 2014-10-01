@@ -145,78 +145,7 @@ id | Unique ID of this endpoint (String)
 name | Name of endpoint (string)
 tags | Assgined Tags (string)
 created | Timestamp when this endpoint was created (Type: ISO 8601 timestamp format)
-
-* **status**
-    * **id**
-        * ID of status this endpoint
-        * Type: Integer
-    * **description**
-        * Description of meaning of the status
-        * Type: String
-* **service_profile**
-    * **id**
-        * ID of assigned service profile
-        * Type: Integer
-    * **name**
-        * Name of the service profile
-        * Type: String
-* **tariff_profile**
-    * **id**
-        * ID of assigned tariff profile
-        * Type: Integer
-    * **name**
-        * Name of the tariff profile
-        * Type: String
-* **image**
-    * filename of image to display for this endpoint
-    * Type: String
-* **sim**
-    * **id**
-        * ID of SIM card
-        * Type: Integer
-    * **iccid**
-        * ICCID of SIM card
-        * Type: String
-    * **imsi**
-        * Currently active IMSI on this SIM card
-        * Type: String
-    * **msisdn**
-        * MSISDN assigned to this SIM card
-        * Type: String
-* **imei**
-    * IMEI number of device in use
-    * Type: String
-* **ip_address**
-    * Configured IP address
-    * Type: String
-* **runtime_data**
-    * **ggsn_ip_address**
-        * IP of GGSN currently serving PDP for this endpoint
-        * Type: String
-    * **sgsn_ip_address**
-        * IP of SGSN currently serving this endpoint
-        * Type: String
-    * **msc**
-        * Globaltitle of MSC this endpoint is connected to
-        * Type: String
-    * **location**
-        * **country**
-            * **id**
-                * ID of current country of this endpoint
-                * Type: Integer
-            * **name**
-                * Name of country
-                * Type: String
-        * **lat**
-            * estimated latitude in degrees
-            * Type: String
-        * **lng**
-            * estimate langitude in degrees
-            * Type: String
-        * **accuracy**
-            * accuracy of the estimated location, in meters. This represents the radius of a circle around the given location.
-            * Type: String
-
+status | **cheating here** I need an embedded object
 
 + Model (application/json)
 
@@ -399,6 +328,10 @@ To create and endpoint provide provide endpoint JSON object.
             }
 
 + Response 201
+
+    + Headers
+
+            Location: https://www.emnify.com/api/v1/endpoint/123
 
     + Body
     
